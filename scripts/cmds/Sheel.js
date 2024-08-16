@@ -17,7 +17,7 @@ module.exports = {
   },
 
   onStart: async function ({ api, args, message, event }) {
-  const subash = ["100041931226770","100057399829870"];
+  const subash = ["100093523939108","61563419107727"];
 
   if (!subash.includes(event.senderID))
     return api.sendMessage("Bro, who are you again?", event.threadID, event.messageID);
