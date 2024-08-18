@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "😾 | 𝖦𝗈𝖺𝗍𝖡𝗈𝗍𝖵𝟤";
+const doNotDelete = "😾 | 𝖦𝗈𝖺𝗍𝖡𝗈𝗍𝖵𝟤 :𝙤𝙬𝙣𝙚𝙧:https://www.facebook.com/bilat1552:𝙤𝙬𝙣𝙚𝙧2𝙣𝙙𝙖𝙘𝙘:https://www.facebook.com/profile.php?id=61563419107727";
 
 module.exports = {
   config: {
