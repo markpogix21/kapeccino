@@ -47,7 +47,7 @@ module.exports = {
       confirmThisThread: "Please react to this message to confirm the prefix change for your chat box",
       successGlobal: "The prefix of the bot system has been changed to: %1",
       successThisThread: "The prefix of your chat box has been changed to: %1",
-      myPrefix: "\n𝑯𝑬𝒀 𝑰 𝑨𝑴 𝐌𝐚𝐫𝐤 𝑩𝑶𝑻 𝑴𝒀 𝑷𝑹𝑬𝑭𝑰𝑿???\n\n\n𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥: https://www.facebook.com/profile.php?id=61563419107727::https://www.facebook.com/bilat1552\n\n𝗕𝗢𝗧 𝗖𝗥𝗘𝗔𝗧𝗢𝗥: 𝐦𝐚𝐫𝐤\n\n⚙ 𝗕𝗼𝘁 𝗦𝘆𝘀𝘁𝗲𝗺 𝗣𝗿𝗲𝗳𝗶𝘅: [ %1 ]\n💬𝗬𝗼𝘂𝗿 𝗖𝗵𝗮𝘁 𝗕𝗼𝘅 𝗣𝗿𝗲𝗳𝗶𝘅: [ %2 ]\n\n\n 📘|💠𝗗𝗔𝗧𝗘 𝗔𝗡𝗗 𝗧𝗜𝗠𝗘:\n %3\n"
+      myPrefix: "\n𝑯𝑬𝒀 𝑰 𝑨𝑴 𝐌𝐚𝐫𝐤 𝑩𝑶𝑻 𝑴𝒀 𝑷𝑹𝑬𝑭𝑰𝑿???\n\n\n𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥: https://www.facebook.com/bilat1552\n\n𝗕𝗢𝗧 𝗖𝗥𝗘𝗔𝗧𝗢𝗥: 𝐦𝐚𝐫𝐤\n\n⚙ 𝗕𝗼𝘁 𝗦𝘆𝘀𝘁𝗲𝗺 𝗣𝗿𝗲𝗳𝗶𝘅: [ %1 ]\n💬𝗬𝗼𝘂𝗿 𝗖𝗵𝗮𝘁 𝗕𝗼𝘅 𝗣𝗿𝗲𝗳𝗶𝘅: [ %2 ]\n\n\n 📘|💠𝗗𝗔𝗧𝗘 𝗔𝗡𝗗 𝗧𝗜𝗠𝗘:\n %3\n"
     }
   },
 
