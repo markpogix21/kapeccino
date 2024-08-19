@@ -3,7 +3,7 @@ module.exports = {
 		name: "balance",
 		aliases: ["bal"],
 		version: "1.2",
-		author: "NTKhang",
+		author: "mark pogi ",
 		countDown: 5,
 		role: 0,
 		description: {
@@ -25,7 +25,10 @@ module.exports = {
 			moneyOf: "%1 đang có %2$"
 		},
 		en: {
-			money: "You have %1$",
+			money: `━━━━━━━━━━━━━
+💸💰 𝙮𝙤𝙪 𝙝𝙖𝙫𝙚 𝙢𝙤𝙣𝙚𝙮 💸💰
+         %1$
+━━━━━━━━━━━━━ 𝙮𝙤𝙪 𝙣𝙚𝙚𝙙 𝙩𝙤 𝙥𝙡𝙖𝙮 𝙩𝙤 𝙜𝙚𝙩 𝙢𝙤𝙧𝙚 𝙢𝙤𝙣𝙚𝙮`,
 			moneyOf: "%1 has %2$"
 		}
 	},
