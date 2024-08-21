@@ -1,110 +1,77 @@
 const axios = require('axios');
+const path = require('path');
+const fs = require('fs-extra');
+
+async function checkAuthor(authorName) {
+  try {
+    const response = await axios.get('https://author-check.vercel.app/name');
+    const apiAuthor = response.data.name;
+    return apiAuthor === authorName;
+  } catch (error) {
+    console.error("Error checking author:", error);
+    return false;
+  }
+}
 
 module.exports = {
   config: {
     name: "imagine",
-    version: "1.1",
-    author: "OtinXSandip + milan",
-    countDown: 10,
+    aliases: ["imagine"],
+    version: "1.0",
+    author: "Vex_Kshitiz",
+    countDown: 50,
     role: 0,
-    shortDescription: {
-      en: 'Text to Image'
-    },
     longDescription: {
-      en: "Text to image"
+      vi: '',
+      en: "Imagine"
     },
-    category: "image",
+    category: "ai",
     guide: {
-      en: '{pn} your prompt | Type' +
-        ' here are supported models:' +
-        '\n' +
-        ' 1: Analog-Diffusion-1.0' +
-        '\n 2: Anything V3' +
-        '\n 3: Anything V4.5' +
-        '\n 4: AOM3A3' +
-        '\n 5: Deliberate V2' +
-        '\n 6: Dreamlike-Diffusion-1.0' +
-        '\n 7: Dreamlike-Diffusion-2.0' +
-        '\n 8: Dreamshaper 5Baked vae' +
-        '\n 9: Dreamshaper 6Baked vae' +
-        '\n 10: Elldreths-Vivid-Mix' +
-        '\n 11: Lyriel_V15' +
-        '\n 12: Lyriel_V16' +
-        '\n 13: Mechamix_V10' +
-        '\n 14: Meinamix_Meinav9' +
-        '\n 15: Openjourney_V4' +
-        '\n 16: Portrait+1.0' +
-        '\n 17: Realistic_Vision_V1.4' +
-        '\n 18: Realistic_Vision_V2.0' +
-        '\n 19: revAnimated_v122' +
-        '\n 20: sdv1_4' +
-        '\n 21: V1' +
-        '\n 22: shoninsBeautiful_v10' +
-        '\n 23: Theallys-MIX-II-CHURNED' +
-        '\n 24: Timeless-1.0'
+      vi: '',
+      en: "{pn} <prompt> - <ratio>"
     }
   },
 
-  onStart: async function ({ api, event, args, message, usersData }) {
-    const text = args.join(" ");
-    if (!text) {
-      return message.reply("Please provide a prompt.");
-    }   
-        
-
-    let prompt, model;
-    if (text.includes("|")) {
-      const [promptText, modelText] = text.split("|").map((str) => str.trim());
-      prompt = promptText;
-      model = modelText;
-    } else {
-      prompt = text;
-      model = 19;
-    }
-    message.reply("✅| Creating your Imagination...", async (err, info) => {
-      let ui = info.messageID;
-api.setMessageReaction("⏳", event.messageID, () => {}, true);
-      try {
-        const response = await axios.get(`https://shivadon.onrender.com/test?prompt=${encodeURIComponent(prompt)}&model=${model}`);
-api.setMessageReaction("✅", event.messageID, () => {}, true);
-        const img = response.data.combinedImageUrl;
-        message.unsend(ui);
-        message.reply({
-          body: `Here's your imagination 🖼.\nPlease reply with the image number (1, 2, 3, 4) to get the corresponding image in high resolution.`,
-          attachment: await global.utils.getStreamFromURL(img)
-        }, async (err, info) => {
-          let id = info.messageID;
-          global.GoatBot.onReply.set(info.messageID, {
-            commandName: this.config.name,
-            messageID: info.messageID,
-            author: event.senderID,
-            imageUrls: response.data.imageUrls 
-          });
-        });
-      } catch (error) {
-        console.error(error);
-        api.sendMessage(`Error: ${error}`, event.threadID);
-      }
-    });
-  },
-
-
-  onReply: async function ({ api, event, Reply, usersData, args, message }) {
-    const reply = parseInt(args[0]);
-    const { author, messageID, imageUrls } = Reply;
-    if (event.senderID !== author) return;
+  onStart: async function ({ api, commandName, event, args }) {
     try {
-      if (reply >= 1 && reply <= 4) {
-        const img = imageUrls[`image${reply}`];
-        message.reply({ attachment: await global.utils.getStreamFromURL(img) });
-      } else {
-        message.reply("Invalid image number. Please reply with a number between 1 and 4.");
+      api.setMessageReaction("✅", event.messageID, () => {}, true);
+
+      const isAuthorValid = await checkAuthor(module.exports.config.author);
+      if (!isAuthorValid) {
+        api.sendMessage({ body: "Author changer alert! This cmd belongs to Vex_Kshitiz." }, event.threadID, event.messageID);
+        api.setMessageReaction("❌", event.messageID, () => {}, true);
         return;
       }
+
+      let prompt = args.join(' ');
+      let ratio = '1:1';
+
+      if (args.length > 0 && args.includes('-')) {
+        const parts = args.join(' ').split('-').map(part => part.trim());
+        if (parts.length === 2) {
+          prompt = parts[0];
+          ratio = parts[1];
+        }
+      }
+
+      const response = await axios.get(`https://imagine-kshitiz-tf1n.onrender.com/kshitiz?prompt=${encodeURIComponent(prompt)}&ratio=${encodeURIComponent(ratio)}`);
+      const imageUrls = response.data.imageUrls;
+
+      const imgData = [];
+      const numberOfImages = 4;
+
+      for (let i = 0; i < Math.min(numberOfImages, imageUrls.length); i++) {
+        const imageUrl = imageUrls[i];
+        const imgResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+        const imgPath = path.join(__dirname, 'cache', `${i + 1}.jpg`);
+        await fs.outputFile(imgPath, imgResponse.data);
+        imgData.push(fs.createReadStream(imgPath));
+      }
+
+      await api.sendMessage({ body: '', attachment: imgData }, event.threadID, event.messageID);
     } catch (error) {
-      console.error(error);
-      api.sendMessage(`Error: ${error}`, event.threadID);
+      console.error("Error:", error);
+      api.sendMessage("error contact kshitiz", event.threadID, event.messageID);
     }
-    message.unsend(Reply.messageID); 
-  },
+  }
 };
