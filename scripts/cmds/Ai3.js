@@ -1,13 +1,69 @@
+const axios = require("axios");
 module.exports = {
-config: {
-name: "ai3", 
-author: "Aljur Pogoy",//Change nyu lang Yung author 
-category: "ai3" 
-},
-onStart: () => {},
-onChat: async function ({ message: { reply: r }, args: a, event: { body } })  {
-if(!body?.toLowerCase().startsWith("ai"))
-return;
-require("axios").get(`${String.fromCharCode(104,116,116,112,115,58,47,47,116,111,111,108,115,46,98,101,116,97,98,111,116,122,46,101,117,46,111,114,103,47,116,111,111,108,115,47,111,112,101,110,97,105,63,113,61)}${a.slice(1).join(" ") || "hello"}`).then(({data:{result:_}})=>r(_)).catch(({message:_})=>r(_));
-}
+	config: {
+		name: 'mark',
+		version: '1.2',
+		author: 'KENLIEPLAYS',
+		countDown: 0,
+		role: 0,
+		shortDescription: 'Simsimi ChatBot by simsimi.site',
+		longDescription: {
+			en: 'Chat with simsimi'
+		},
+		category: 'sim',
+		guide: {
+			en: '   {pn} <word>: chat with simsimi'
+				+ '\n   Example:{pn} hi'
+		}
+	},
+
+	langs: {
+		en: {
+			chatting: 'Already Chatting with sim...',
+			error: 'What?'
+		}
+	},
+
+	onStart: async function ({ args, message, event, getLang }) {
+		if (args[0]) {
+			const yourMessage = args.join(" ");
+			try {
+				const responseMessage = await getMessage(yourMessage);
+				return message.reply(`${responseMessage}`);
+			}
+			catch (err) {
+				console.log(err)
+				return message.reply(getLang("error"));
+			}
+		}
+	},
+
+	onChat: async ({ args, message, threadsData, event, isUserCallCommand, getLang }) => {
+		if (!isUserCallCommand) {
+			return;
+		}
+		if (args.length > 1) {
+			try {
+				const langCode = await threadsData.get(event.threadID, "settings.lang") || global.GoatBot.config.language;
+				const responseMessage = await getMessage(args.join(" "), langCode);
+				return message.reply(`${responseMessage}`);
+			}
+			catch (err) {
+				return message.reply(getLang("error"));
+			}
+		}
+	}
 };
+
+async function getMessage(yourMessage, langCode) {
+	try {
+		const res = await axios.get(`https://simsimi.site/api/v2/?mode=talk&lang=ph&message=${yourMessage}&filter=false`);
+		if (!res.data.success) {
+			throw new Error('API returned a non-successful message');
+		}
+		return res.data.success;
+	} catch (err) {
+		console.error('Error while getting a message:', err);
+		throw err;
+	}
+                  }
