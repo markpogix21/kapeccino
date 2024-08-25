@@ -1,4 +1,4 @@
-const axios = require('axios');
+,cmd install Ask.js const axios = require('axios');
 
 async function fetchFromAI(url, params) {
   try {
@@ -37,7 +37,7 @@ async function getAIResponse(input, userId, messageID) {
  module.exports = {
   config: {
     name: 'ai',
-    author: 'Arn',
+    author: 'mark pogi',
     role: 0,
     category: 'ai',
     shortDescription: 'ai to ask anything',
@@ -45,13 +45,17 @@ async function getAIResponse(input, userId, messageID) {
   onStart: async function ({ api, event, args }) {
     const input = args.join(' ').trim();
     if (!input) {
-      api.sendMessage(`𝙮𝙪𝙩𝙖 𝙖𝙞\n━━━━━━━━━━━━━━━━\nPlease provide a question or statement.\n━━━━━━━━━━━━━━━━
+      api.sendMessage(`\n╭┈◈『 ♠︎ 』 𝙔𝙐𝙏𝘼 𝘼𝙄 ☪️
+┆
+╰┈◈➤\nPlease provide a question or statement.\n━━━━━━━━━━━━━━━━
 𝙤𝙬𝙣𝙚𝙧: https://www.facebook.com/bilat1552`, event.threadID, event.messageID);
       return;
     }
 
     const { response, messageID } = await getAIResponse(input, event.senderID, event.messageID);
-    api.sendMessage(`𝙮𝙪𝙩𝙖 𝙖𝙞\n━━━━━━━━━━━━━━━━\n${response}\n━━━━━━━━━━━━━━━━
+    api.sendMessage(`\n╭┈◈『 ♠︎ 』 𝙔𝙐𝙏𝘼 𝘼𝙄 ☪️
+┆
+╰┈◈➤\n${response}\n━━━━━━━━━━━━━━━━
 𝙊𝙬𝙣𝙚𝙧 2𝙣𝙙 𝙖𝙘𝙘: https://www.facebook.com/profile.php?id=61563419107727`, event.threadID, messageID);
   },
   onChat: async function ({ event, message }) {
@@ -59,7 +63,9 @@ async function getAIResponse(input, userId, messageID) {
     if (messageContent.startsWith("ai")) {
       const input = messageContent.replace(/^ai\s*/, "").trim();
       const { response, messageID } = await getAIResponse(input, event.senderID, message.messageID);
-      message.reply(`𝙮𝙪𝙩𝙖 𝙖𝙞\n━━━━━━━━━━━━━━━━\n${response}\n━━━━━━━━━━━━━━━━
+      message.reply(`\n╭┈◈『 ♠︎ 』 𝙔𝙐𝙏𝘼 𝘼𝙄 ☪️
+┆
+╰┈◈➤\n${response}\n━━━━━━━━━━━━━━━━
 𝙈𝙮 𝙤𝙬𝙣𝙚𝙧: https://www.facebook.com/bilat1552`, messageID);
     }
   }
