@@ -1,4 +1,4 @@
-,cmd install Ask.js const axios = require('axios');
+const axios = require('axios');
 
 async function fetchFromAI(url, params) {
   try {
