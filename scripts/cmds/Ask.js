@@ -18,7 +18,7 @@ async function getAIResponse(input, userId, messageID) {
     { url: 'https://ai-chat-gpt-4-lite.onrender.com/api/hercai', params: { question: input } }
   ];
 
-  let response = "𝙃𝙚𝙮, 𝙢𝙮 𝙣𝙖𝙢𝙚 𝙞𝙨 𝙥𝙤𝙨𝙞𝙩𝙞𝙫𝙚 𝙖𝙞 𝙖𝙨𝙠 𝙢𝙚 𝙖𝙣𝙮 𝙦𝙪𝙚𝙨𝙩𝙞𝙤𝙣𝙨 𝙢𝙖𝙝𝙖𝙡 ✏, 𝙄'𝙡𝙡 𝙗𝙚 𝙝𝙖𝙥𝙥𝙮 𝙩𝙤 𝙖𝙣𝙨𝙬𝙚𝙧 𝙮𝙤𝙪";
+  let response ="ʜᴇʟʟᴏ ᴅᴇᴀʀ ɪ'ᴍ ʏᴏᴜʀ ᴀssɪsᴛᴀɴᴛ ɪᴢᴀɴᴀ ᴀɪ 🎴";
   let currentIndex = 0;
 
   for (let i = 0; i < services.length; i++) {
@@ -34,6 +34,11 @@ async function getAIResponse(input, userId, messageID) {
   return { response, messageID };
 }
 
+const jake = `╭┈◈『 ✿ 』 𝙄𝙕𝘼𝙉𝘼 𝘼𝙞 🎴
+🎴
+┆
+╰┈◈➤`;
+
  module.exports = {
   config: {
     name: 'ai',
@@ -45,28 +50,22 @@ async function getAIResponse(input, userId, messageID) {
   onStart: async function ({ api, event, args }) {
     const input = args.join(' ').trim();
     if (!input) {
-      api.sendMessage(`\n╭┈◈『 ♠︎ 』 𝙔𝙐𝙏𝘼 𝘼𝙄 ☪️
-┆
-╰┈◈➤\nPlease provide a question or statement.\n━━━━━━━━━━━━━━━━
-𝙤𝙬𝙣𝙚𝙧: https://www.facebook.com/bilat1552`, event.threadID, event.messageID);
+      api.sendMessage(`${jake}\nPlease provide a question or statement.\n
+`, event.threadID, event.messageID);
       return;
     }
 
     const { response, messageID } = await getAIResponse(input, event.senderID, event.messageID);
-    api.sendMessage(`\n╭┈◈『 ♠︎ 』 𝙔𝙐𝙏𝘼 𝘼𝙄 ☪️
-┆
-╰┈◈➤\n${response}\n━━━━━━━━━━━━━━━━
-𝙊𝙬𝙣𝙚𝙧 2𝙣𝙙 𝙖𝙘𝙘: https://www.facebook.com/profile.php?id=61563419107727`, event.threadID, messageID);
+    api.sendMessage(`${jake}\n${response}\n
+`, event.threadID, messageID);
   },
   onChat: async function ({ event, message }) {
     const messageContent = event.body.trim().toLowerCase();
     if (messageContent.startsWith("ai")) {
       const input = messageContent.replace(/^ai\s*/, "").trim();
       const { response, messageID } = await getAIResponse(input, event.senderID, message.messageID);
-      message.reply(`\n╭┈◈『 ♠︎ 』 𝙔𝙐𝙏𝘼 𝘼𝙄 ☪️
-┆
-╰┈◈➤\n${response}\n━━━━━━━━━━━━━━━━
-𝙈𝙮 𝙤𝙬𝙣𝙚𝙧: https://www.facebook.com/bilat1552`, messageID);
+      message.reply(`${jake}\n${response}\n
+`, messageID);
     }
   }
 };
