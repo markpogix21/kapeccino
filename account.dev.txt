@@ -14,19 +14,6 @@
     },
     {
         "domain": ".facebook.com",
-        "expirationDate": 1759625612.035917,
-        "hostOnly": false,
-        "httpOnly": true,
-        "name": "datr",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "4FWnZodKcTdVZpnMeNF0MevC"
-    },
-    {
-        "domain": ".facebook.com",
         "expirationDate": 1732841613.89094,
         "hostOnly": false,
         "httpOnly": true,
@@ -40,7 +27,7 @@
     },
     {
         "domain": ".facebook.com",
-        "expirationDate": 1730249618,
+        "expirationDate": 1730617788,
         "hostOnly": false,
         "httpOnly": false,
         "name": "vpd",
@@ -66,7 +53,7 @@
     },
     {
         "domain": ".facebook.com",
-        "expirationDate": 1756601618,
+        "expirationDate": 1756969788,
         "hostOnly": false,
         "httpOnly": false,
         "name": "fbl_st",
@@ -75,7 +62,7 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "101326399%3BT%3A28751093"
+        "value": "101429978%3BT%3A28757229"
     },
     {
         "domain": ".facebook.com",
@@ -89,18 +76,6 @@
         "session": false,
         "storeId": null,
         "value": "en_US"
-    },
-    {
-        "domain": ".facebook.com",
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "m_pixel_ratio",
-        "path": "/",
-        "sameSite": null,
-        "secure": true,
-        "session": true,
-        "storeId": null,
-        "value": "2"
     },
     {
         "domain": ".facebook.com",
@@ -156,7 +131,7 @@
     },
     {
         "domain": ".facebook.com",
-        "expirationDate": 1732841618,
+        "expirationDate": 1733209788,
         "hostOnly": false,
         "httpOnly": false,
         "name": "wl_cbv",
@@ -165,6 +140,6 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "v2%3Bclient_version%3A2607%3Btimestamp%3A1725065615"
+        "value": "v2%3Bclient_version%3A2607%3Btimestamp%3A1725433787"
     }
 ]
