@@ -77,7 +77,9 @@ module.exports = {
 
             let msg = "";
             for (const [category, cmds] of Object.entries(categorizedCommands)) {
-                msg += `『🎴 ${category} 🎴』\n${cmds.join(", ")}\n\n`;
+                msg += `╭┈◈『  ❍  』 
+┆
+╰┈◈➤${category}\n${cmds.join(", ")}\n\n`;
             }
 
             return message.reply(getLang("helpAll", msg.trim()));
@@ -115,7 +117,9 @@ module.exports = {
 
             const returnArray = allPage[page - 1] || [];
             const startNumber = (page - 1) * numberOfOnePage + 1;
-            msg += (returnArray || []).reduce((text, item, index) => text += `🎴 ${index + startNumber} 🎴 ${item.data}\n`, '').slice(0, -1);
+            msg += (returnArray || []).reduce((text, item, index) => text += `╭┈◈『  ☪︎  』 
+┆
+╰┈◈➤ ${index + startNumber}  ${item.data}\n`, '').slice(0, -1);
             await message.reply(getLang("help", msg, page, totalPage, commands.size, prefix, doNotDelete));
         }
         // ———————————— COMMAND DOES NOT EXIST ———————————— //
@@ -241,4 +245,4 @@ function cropContent(content, max = 50) {
         content = content + "...";
     }
     return content;
-    }
+            }
